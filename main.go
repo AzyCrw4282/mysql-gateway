@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/AzyCrw4282/mysql-gateway/api"
+	//"mysql-gateway/api" local import issue
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 	"net/http"
+	"github.com/AzyCrw4282/mysql-gateway/api"
 )
 
 /*
@@ -29,6 +30,6 @@ func main() {
 func setRouterHandlerAndServe(r *mux.Router) {
 	//handle functions for now the first 3 functions
 
-	r.HandleFunc("/")
+	r.HandleFunc("/",api.)
 
 }
