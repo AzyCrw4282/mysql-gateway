@@ -12,7 +12,6 @@ To `SELECT * from users`, you simply do
 curl http://localhost:8080/getTable=users
 ```
 
-
 ## Intended Features
 
 - get the table, 
@@ -33,13 +32,70 @@ curl http://localhost:8080/getTable=users
 
 ## Usage | Instructions
 
-TBA
+First create a `.env` file and add your details. An example is shown below:
+```.env
+listenAddr=:8080
+ost=localhost
+user=postgres
+password=
+db=User1
+port=58379
+```
+
+- get the table, 
+
+To `SELECT * from users`, you simply do
+```
+curl http://localhost:8080/getTable=users
+```
+- get a row by id(PK), 
+
+To `SELECT * from users WHERE x=$1`, you simply do
+```
+curl http://localhost:8080/getTable=users?WHERE x=$1
+```
+
+- get required coloumns
+
+To `SELECT $0,$1,$2 from users`, you simply do
+```
+curl http://localhost:8080/getTable=users?SELECT= $0,$1,$2
+```
+
+----------------------------TBD, Once above are complete---------------------------
+
+- update where field=<value>,
+To `SELECT  from users`, you simply do
+```
+curl http://localhost:8080/getTable=users
+```
+
+
+
+- delete where field=<value>,
+
+To `SELECT  from users`, you simply do
+```
+curl http://localhost:8080/getTable=users
+```
+
+
+
+- insert operation
+To `SELECT  from users`, you simply do
+```
+curl http://localhost:8080/getTable=users
+```
+
+
+
+- get filtered values from multiple columns
 
 
 
 
 
-
+- Perform operations on relational table 
 
 
 
