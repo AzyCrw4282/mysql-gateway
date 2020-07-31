@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
-	"mysql-gateway/api"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
+	"mysql-gateway/api"
 	"net/http"
+	"os"
 	//"github.com/AzyCrw4282/mysql-gateway/api"
-
 )
 
 /*
@@ -26,12 +26,20 @@ func main() {
 	r := mux.NewRouter()
 	setRouterHandlerAndServe(r)
 
-
 }
 
-func setRouterHandlerAndServe(r *mux.Router) {
+func setRouterHandlerAndServe(router *mux.Router) {
 	//handle functions for now the first 3 functions
 
-	r.HandleFunc("/",api.)
+	router.HandleFunc("/", api.HandleAllHeaderOptions).Methods(http.MethodOptions)
+
+	//router functions for all ops handling. patterns comes with variables separated by '/', as
+	//can be seen in the router call
+
+	router.HandleFunc("/{TableEntity}", api.HandleGet).Methods(http.MethodGet)
+	router.HandleFunc("/{TableEntity}/{field}", api.HandleInsert).Methods(http.MethodPost)
+	router.HandleFunc("/{TableEntity}/{field}/{id}", api.HandleDelete).Methods(http.MethodDelete)
+
+	http.ListenAndServe(os.Getenv("listenAddress"), router)
 
 }
