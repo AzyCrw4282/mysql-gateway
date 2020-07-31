@@ -5,6 +5,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 	"mysql-gateway/api"
+	"mysql-gateway/database"
 	"net/http"
 	"os"
 	//"github.com/AzyCrw4282/mysql-gateway/api"
@@ -22,7 +23,8 @@ func main() {
 		fmt.Println("Your .env file didnt get loaded. Make sure it's in the root directory")
 		return
 	}
-
+	//start db connection cache for required pool size
+	database.MakeConneciton()
 	r := mux.NewRouter()
 	setRouterHandlerAndServe(r)
 
