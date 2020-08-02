@@ -14,16 +14,16 @@ var userName = ""
 var password = ""
 var database = ""
 
-func connectOrFail() (db *sql.DB, errVal bool) {
+func connectOrFail() (db *sql.DB, err error) {
 	loadCredentials()
-	db, err := sql.Open("mysql", userName+":"+password+"@/"+database)
+	db, err = sql.Open("mysql", userName+":"+password+"@/"+database)
 
 	if err != nil {
 		fmt.Println("Failed to connect. Likely due to wrong credentails in .env or your sql server is not running")
 		panic(err.Error())
 	}
+	db = db.conn
 
-	errVal = false
 	return
 }
 

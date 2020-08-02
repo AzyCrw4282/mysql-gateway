@@ -24,7 +24,7 @@ func main() {
 		return
 	}
 	//start db connection cache for required pool size
-	database.MakeConneciton()
+	database.CurrConnection = database.MakeSingleConnection()
 	r := mux.NewRouter()
 	setRouterHandlerAndServe(r)
 
@@ -42,6 +42,6 @@ func setRouterHandlerAndServe(router *mux.Router) {
 	router.HandleFunc("/{TableEntity}/{field}", api.HandleInsert).Methods(http.MethodPost)
 	router.HandleFunc("/{TableEntity}/{field}/{id}", api.HandleDelete).Methods(http.MethodDelete)
 
-	http.ListenAndServe(os.Getenv("listenAddress"), router)
+	panic(http.ListenAndServe(os.Getenv("listenAddress"), router))
 
 }

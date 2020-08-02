@@ -4,29 +4,39 @@ import (
 	"database/sql"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql" //for side-effect use with the sql package
+	"os"
 )
 
 //channels and func will handle pool of db connections
-var CurrConnection func()
+var CurrConnection func() *sql.Conn
 
-func MakeConneciton() {
-	db, err := connectOrFail()
-	if err != true {
-		if db.Ping() != nil {
-			fmt.Print("db connection not able to be pinged")
-		}
+//type def for multiple connections
+type connctionCache chan *sql.Conn
+
+func MakeCacheConnection(con connctionCache) {
+	for {
+		db, err := connectOrFail()
+		con <- db.Conn()
 
 	}
-
 }
 
-func cosntantPing() {
+func MakeSingleConnection() {
 
-	go func() {
-		//for {
-		//		//TODO: ping check if conenction drops
-		//
-		//}
-	}()
+	db, err := connectOrFail()
+	if err != nil {
+		fmt.Printf("failed to conenct, db data %v", db)
+		os.Exit(1)
+
+	}
+	return
+}
+
+//called from main class to create the 1.m connections
+func StartConnectionCache(size int) {
+
+	var conCache connctionCache = make(chan *sql.Conn, size)
+	go conCache.MakeCacheConnection()
+	return func() *sql.Conn { return <-conCache }
 
 }
