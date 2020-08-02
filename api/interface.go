@@ -1,6 +1,13 @@
 package api
 
-import "net/http"
+import (
+	"fmt"
+	"github.com/gorilla/mux"
+	"github.com/sirupsen/logrus"
+	"mysql-gateway/database"
+	"net/http"
+	"strconv"
+)
 
 /* TODO: create login:
 get the vars
@@ -9,8 +16,52 @@ then call to db.method() in package, and in there, a call to process query
 finally write the header using responseWriter and give a stuaus code
 
 */
+// :param-> expectedCode : the expected parms in the string, where the sum of all represents 3
+func processString(w http.ResponseWriter, vars map[string]string, expectedCode int) (err error) {
 
-func handleError()
+	//entity,table check
+	var error error
+	for k, v := range vars {
+		fmt.Println("k", k, "v", v)
+
+		switch expectedCode {
+		case 3:
+			if vars[k] == "" {
+				logrus.Println("Issue parsing your table/entity. Please make sure your cmds are correct")
+				break
+			}
+		case 2:
+			if vars[k] == "" {
+				logrus.Println("Issue parsing your row Please make sure your cmds are correct")
+				break
+			}
+		case 1:
+			if vars[k] == "" {
+				logrus.Println("Issue parsing your id. Please make sure your cmds are correct")
+				break
+			}
+		default:
+			fmt.Println("Error in case statements!!!")
+		}
+
+	}
+	http.Error(w, "Error with your request /{entity}", http.StatusBadRequest)
+	return error
+}
+
+func parseString(vars map[string]string) (table string, field string, id int) {
+
+	switch len(vars) {
+	case 3:
+		table = vars["entity"]
+	case 2:
+		field = vars["field"]
+	case 1:
+		id, _ = strconv.Atoi(vars["id"]) //can use atoi, or itoa for the reversal ops
+	}
+	return
+
+}
 
 //writer sets the header for what is to be retutrned
 func HandleAllHeaderOptions(w http.ResponseWriter, r *http.Request) {
@@ -19,18 +70,74 @@ func HandleAllHeaderOptions(w http.ResponseWriter, r *http.Request) {
 
 //includes one and many operation
 func HandleGet(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+
+	//check for all possibities
+	err := processString(w, vars, len(vars))
+
+	if err != nil {
+		fmt.Println("You are missing an empty field.")
+		http.Error(w, "Error with your request /{entity}", http.StatusBadRequest)
+	}
+
+	database.GetData(parseString(vars)) //TODO:check feasibility of this
+
+	w.WriteHeader(http.StatusOK)
 
 }
 
 func HandleDelete(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+
+	//check for all possibities
+	err := processString(w, vars, len(vars))
+
+	if err != nil {
+		fmt.Println("You are missing an empty field.")
+		http.Error(w, "Error with your request /{entity}", http.StatusBadRequest)
+	}
+
+	database.DeleteData()
+
+	w.WriteHeader(http.StatusOK)
 
 }
 
 func HandleInsert(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+
+	//check for all possibities
+	err := processString(w, vars, len(vars))
+
+	if err != nil {
+		fmt.Println("You are missing an empty field.")
+		http.Error(w, "Error with your request /{entity}", http.StatusBadRequest)
+	}
+
+	database.InsertData()
+
+	w.WriteHeader(http.StatusOK)
 
 }
 
-//TODO: To handle relational table operation
+func HandleUpdate(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+
+	//check for all possibities
+	err := processString(w, vars, len(vars))
+
+	if err != nil {
+		fmt.Println("You are missing an empty field.")
+		http.Error(w, "Error with your request /{entity}", http.StatusBadRequest)
+	}
+
+	database.UpdateData()
+
+	w.WriteHeader(http.StatusOK)
+
+}
+
+//TODO: To handle relational table operation at later stage.
 func HandleRelationalOps(w http.ResponseWriter, r *http.Request) {
 
 }
