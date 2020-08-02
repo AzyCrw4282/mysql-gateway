@@ -24,7 +24,10 @@ func main() {
 		return
 	}
 	//start db connection cache for required pool size
-	database.CurrConnection = database.MakeSingleConnection()
+	database.MakeSingleConnection()
+
+	database.CurrConnection = database.StartConnectionCache(4)
+
 	r := mux.NewRouter()
 	setRouterHandlerAndServe(r)
 

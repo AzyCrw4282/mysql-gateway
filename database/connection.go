@@ -1,6 +1,7 @@
 package database
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
@@ -14,15 +15,16 @@ var userName = ""
 var password = ""
 var database = ""
 
-func connectOrFail() (db *sql.DB, err error) {
+func connectOrFail() (db *sql.Conn, err error) {
 	loadCredentials()
-	db, err = sql.Open("mysql", userName+":"+password+"@/"+database)
+	datab, err := sql.Open("mysql", userName+":"+password+"@/"+database)
 
 	if err != nil {
 		fmt.Println("Failed to connect. Likely due to wrong credentails in .env or your sql server is not running")
 		panic(err.Error())
 	}
-	db = db.conn
+	ctx, _ := context.WithCancel(context.Background())
+	db, _ = datab.Conn(ctx)
 
 	return
 }
