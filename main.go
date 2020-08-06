@@ -41,7 +41,7 @@ func setRouterHandlerAndServe(router *mux.Router) {
 	//router functions for all ops handling. patterns comes with variables separated by '/', as
 	//can be seen in the router call
 
-	router.HandleFunc("/{TableEntity}", api.HandleGet).Methods(http.MethodGet)
+	router.HandleFunc("/{TableEntity}", api.HandleGetOneOrMany).Methods(http.MethodGet)
 	router.HandleFunc("/{TableEntity}/{field}", api.HandleInsert).Methods(http.MethodPost)
 	router.HandleFunc("/{TableEntity}/{field}/{id}", api.HandleDelete).Methods(http.MethodDelete)
 

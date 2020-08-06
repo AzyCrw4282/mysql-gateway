@@ -69,7 +69,7 @@ func HandleAllHeaderOptions(w http.ResponseWriter, r *http.Request) {
 }
 
 //includes one and many operation
-func HandleGet(w http.ResponseWriter, r *http.Request) {
+func HandleGetOneOrMany(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 
 	//check for all possibities
