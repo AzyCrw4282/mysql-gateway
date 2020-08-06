@@ -1,3 +1,5 @@
+#all ignored files
 *.env
 testSamplesFiles.txt
 notes
+notes.txt
