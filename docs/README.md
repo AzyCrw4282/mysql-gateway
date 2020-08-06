@@ -1,0 +1,1 @@
+Contains all metafiles, images and all miscellanous files to be used in root dir Readme
