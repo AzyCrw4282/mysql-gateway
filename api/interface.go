@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
+	"mysql-gateway/client"
 	"mysql-gateway/database"
+	"mysql-gateway/queryHandlers"
 	"net/http"
 	"strconv"
 )
@@ -80,7 +82,18 @@ func HandleGetOneOrMany(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Error with your request /{entity}", http.StatusBadRequest)
 	}
 
-	database.GetData(parseString(vars)) //TODO:check feasibility of this
+	parseString(vars) //TODO:check feasibility of this
+
+	query, err := queryHandlers.GetQueryFromUrl(r.URL.String()) //
+
+	if err != nil {
+		fmt.Println("You are missing an empty field.")
+		CallHTTPBadRequest(w)
+	}
+
+	result, err := database.GetData(query)
+
+	client.WriteToClient(result) //passes the chan to write it to client
 
 	w.WriteHeader(http.StatusOK)
 
@@ -111,7 +124,7 @@ func HandleInsert(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		fmt.Println("You are missing an empty field.")
-		http.Error(w, "Error with your request /{entity}", http.StatusBadRequest)
+
 	}
 
 	database.InsertData()
@@ -140,4 +153,8 @@ func HandleUpdate(w http.ResponseWriter, r *http.Request) {
 //TODO: To handle relational table operation at later stage.
 func HandleRelationalOps(w http.ResponseWriter, r *http.Request) {
 
+}
+
+func CallHTTPBadRequest(w http.ResponseWriter) {
+	http.Error(w, "Error with your request /{entity}", http.StatusBadRequest)
 }
