@@ -3,14 +3,19 @@ package queryHandlers
 import "strings"
 
 //Allows to 1) BuildTheQuery, by breaking it into components of the `r` module
-func GetQueryFromUrl(url string) (result Query, err error) {
+func GetQueryFromUrl(url string) (resultQuery Query, err error) {
 	splitURL := SplitUrlWithExclusion(url)
+
+	resultQuery = Query{
+		Table:       splitURL[0],
+		comparisons: []comparators{}, // cmparator struct to hold the value of the
+	}
 
 	return
 }
 
 /*splits the url with respect to comparative ops and terms
-Example string: users?a=eq.b&c=gt.d
+E.g. Input string: users?a=eq.b&c=gt.d
 output: [users,a=eq.b,c=gt.d]
 */
 func SplitUrlWithExclusion(url string) []string {
