@@ -5,3 +5,8 @@ func GetQueryFromUrl(url string) (result Query, err error) {
 
 	return
 }
+
+func SpliturlWithExclusion(url string) []string {
+
+	return
+}
