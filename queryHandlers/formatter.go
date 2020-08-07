@@ -1,12 +1,29 @@
 package queryHandlers
 
+import "strings"
+
 //Allows to 1) BuildTheQuery, by breaking it into components of the `r` module
 func GetQueryFromUrl(url string) (result Query, err error) {
+	splitURL := SplitUrlWithExclusion(url)
 
 	return
 }
 
-func SpliturlWithExclusion(url string) []string {
+/*splits the url with respect to comparative ops and terms
+Example string: users?a=eq.b&c=gt.d
+output: [users,a=eq.b,c=gt.d]
+*/
+func SplitUrlWithExclusion(url string) []string {
+	splitResult := strings.Split(url, "?")
 
-	return
+	if len(splitResult) == 1 { //no split char present
+		return splitResult
+	}
+
+	splitArrayResult := make([]string, 10)
+	secondSplit := strings.Split(splitResult[1], "&")
+	splitArrayResult = append(splitArrayResult, splitResult[0]) //adds entity/table name
+	splitArrayResult = append(splitArrayResult, secondSplit...) //passes in a varaiadic function
+
+	return splitArrayResult
 }
