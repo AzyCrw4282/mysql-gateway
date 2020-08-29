@@ -8,7 +8,7 @@ func GetQueryFromUrl(url string) (resultQuery Query, err error) {
 
 	resultQuery = Query{
 		Table:       splitURL[0],
-		comparisons: []comparators{}, // cmparator struct to hold the value of the
+		comparisons: []comparators{}, // comparator struct to hold the value of the
 	}
 
 	return

@@ -84,6 +84,7 @@ func HandleGetOneOrMany(w http.ResponseWriter, r *http.Request) {
 
 	parseString(vars) //TODO:check feasibility of this
 
+	//it may need to be [1:0] to avoid <moduleName> input
 	query, err := queryHandlers.GetQueryFromUrl(r.URL.String()) //forms the query from the url
 
 	if err != nil {
