@@ -84,7 +84,7 @@ func HandleGetOneOrMany(w http.ResponseWriter, r *http.Request) {
 
 	parseString(vars) //TODO:check feasibility of this
 
-	query, err := queryHandlers.GetQueryFromUrl(r.URL.String()) //
+	query, err := queryHandlers.GetQueryFromUrl(r.URL.String()) //forms the query from the url
 
 	if err != nil {
 		fmt.Println("You are missing an empty field.")
