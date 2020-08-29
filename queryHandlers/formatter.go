@@ -11,12 +11,15 @@ func GetQueryFromUrl(url string) (resultQuery Query, err error) {
 		comparisons: []comparators{}, // comparator struct to hold the value of the
 	}
 
+	//pass pointer of the results and then return that
+	resultQuery.comparisons, err = SplitsToCohesiveForm(resultQuery.comparisons)
+
 	return
 }
 
 /*splits the url with respect to comparative ops and terms
 E.g. Input string: users?a=eq.b&c=gt.d
-output: [users,a=eq.b,c=gt.d]
+output: [users,a=eq.b,c=gt.d] ( `,` separates an `&`)
 */
 func SplitUrlWithExclusion(url string) []string {
 	splitResult := strings.Split(url, "?")
@@ -28,7 +31,18 @@ func SplitUrlWithExclusion(url string) []string {
 	splitArrayResult := make([]string, 10)
 	secondSplit := strings.Split(splitResult[1], "&")
 	splitArrayResult = append(splitArrayResult, splitResult[0]) //adds entity/table name
-	splitArrayResult = append(splitArrayResult, secondSplit...) //passes in a varaiadic function
+	splitArrayResult = append(splitArrayResult, secondSplit...) //passes in a variadic function
 
 	return splitArrayResult
+}
+
+/* Formats and updates the stirng using compartor struct and saving values to the relevant fields
+   Input -> [users,a=eq.b,c=gt.d] ( `,` separates an `&`)
+   Output -> resultsquery of all splits consisting of field, and all fields using type compartors (struct)
+*/
+func SplitsToCohesiveForm(comparisons []comparators) (resultObj []comparators, err error) {
+
+	//Here
+
+	return
 }
