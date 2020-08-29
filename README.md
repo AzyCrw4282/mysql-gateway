@@ -1,4 +1,4 @@
-This project allows interaction with the MySQL database over HTTP
+This project aims to allow interaction with the MySQL database over HTTP
 
 
 ## What is it?
@@ -12,10 +12,19 @@ To `SELECT * from users`, you simply do
 curl http://localhost:8080/getTable=users
 ```
 
+## Usage Instructions
+
+- Build from the src, 
+
+Or
+
+- Run through the docker container `docker pull <dockerImage>`
+
+
 ## Intended Features
 
-- get the table, 
-- get a row by id, 
+- get the table, --Done
+- get a row by id, --Done
 - get required coloumns
 - update where field=<value>,
 - delete where field=<value>,
@@ -28,6 +37,7 @@ curl http://localhost:8080/getTable=users
 -- For all above, perform aggregate function
 
 - Perform operations on relational table 
+
 
 
 ## Usage | Instructions
