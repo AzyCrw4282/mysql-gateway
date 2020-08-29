@@ -12,13 +12,15 @@ To `SELECT * from users`, you simply do
 curl http://localhost:8080/getTable=users
 ```
 
-## Usage Instructions
+## Setup 
 
+Set required credentials in a `.env` file. See Instructions section for more on this. 
+And then either,
 - Build from the src, 
 
 Or
 
-- Run through the docker container `docker pull <dockerImage>`
+- Run through the docker container `docker pull <dockerImage>` -TBD
 
 
 ## Intended Features
@@ -40,7 +42,7 @@ Or
 
 
 
-## Usage | Instructions
+## Instructions
 
 First create a `.env` file and add your details. An example is shown below:
 ```.env
