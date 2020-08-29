@@ -103,9 +103,17 @@ curl http://localhost:8080/getTable=users
 
 #### Acknowledgements
 
-This project was inspired by the works from user @just1689 and his project, `pg-gatway` where postgresql db can be interacted 
-over HTTP using module such as `curl` .
+This project is not possible without the `mysql-driver` for Golang, so the credits are due respectively to all the relevant contributors.
+
+Thanks to user @just1689 and his project, `pg-gatway` where postgresql db can be interacted 
+over HTTP using module such as `curl`.
 
 
 
 #### Packages used
+
+- mux - An HTTP router
+
+- Go MySQL driver - The main driver for Golang
+
+- MySQL - MySQL RDBMS
