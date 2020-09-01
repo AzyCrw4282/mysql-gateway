@@ -1,6 +1,4 @@
-This project aims to allow interaction with the MySQL database over HTTP
-
-
+This project aims to allow interaction with the MySQL database over HTTP.
 ## What is it?
 
 To interact wit the `mysql` database it requires you to either access it via the 
@@ -120,8 +118,6 @@ This project is not possible without the `mysql-driver` for Golang, so the credi
 Thanks to user @just1689 and his project, `pg-gatway` where postgresql db can be interacted 
 over HTTP using module such as `curl`.
 
-
-
 #### Packages used
 
 - mux - An HTTP router
@@ -129,3 +125,6 @@ over HTTP using module such as `curl`.
 - Go MySQL driver - The main driver for Golang
 
 - MySQL - MySQL RDBMS
+
+##### NB: This project is still in development and so is not recommended for production use or application with security vulnerability.
+
