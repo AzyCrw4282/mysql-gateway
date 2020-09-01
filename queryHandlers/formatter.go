@@ -36,7 +36,7 @@ func SplitUrlWithExclusion(url string) []string {
 	return splitArrayResult
 }
 
-/* Formats and updates the string using compartor struct and saving values to the relevant fields
+/* Formats and updates the string using comparator struct and saving values to the relevant fields
    Input -> [users,a=eq.b,c=gt.d] ( `,` separates an `&`)
    Output -> resultsquery of all splits consisting of field, and all fields using type comparators (struct)
 */

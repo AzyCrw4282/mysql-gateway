@@ -74,7 +74,7 @@ func HandleAllHeaderOptions(w http.ResponseWriter, r *http.Request) {
 func HandleGetOneOrMany(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 
-	//check for all possibities
+	//check for all possibilities
 	err := processString(w, vars, len(vars))
 
 	if err != nil {
