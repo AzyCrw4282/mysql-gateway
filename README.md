@@ -126,5 +126,5 @@ over HTTP using module such as `curl`.
 
 - MySQL - MySQL RDBMS
 
-##### NB: This project is still in development and so is not recommended for production use or application with security vulnerability.
+##### NB: This project is still in development and so is not recommended for production use or for an application with security vulnerability.
 

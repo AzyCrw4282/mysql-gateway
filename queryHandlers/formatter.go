@@ -1,6 +1,9 @@
 package queryHandlers
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 //Allows to 1) BuildTheQuery, by breaking it into components of the `r` module
 func GetQueryFromUrl(url string) (resultQuery Query, err error) {
@@ -10,7 +13,6 @@ func GetQueryFromUrl(url string) (resultQuery Query, err error) {
 		Table:       splitURL[0],
 		comparisons: []comparators{}, // comparator struct to hold the value of the
 	}
-
 	//pass pointer of the results?
 	resultQuery.comparisons, err = SplitsToCohesiveForm(splitURL, resultQuery)
 
@@ -53,12 +55,19 @@ func SplitsToCohesiveForm(splitdata []string, resultQuery Query) (resultObj []co
 		comp := comparators{
 			Field: data[0],
 		}
-		comparators := strings.Split(data[1], ".")
-
-		comp.ComparatorObj = comparators[0]
-		comp.Value = comparators[1]
+		secSplit := strings.Split(data[1], ".") //if no `.` means an aggregate function and it wont split and resolves existing element to the array
+		//check for Limit or aggregate function
+		if len(secSplit) == 1 {
+			AggregateFunc, err := resultQuery.ProcessAggregateValues(data[0], secSplit[0])
+			if err != nil {
+				return
+			}
+			fmt.Print(AggregateFunc, "Boolean eval of aggreate or limit functions")
+			continue
+		}
+		comp.ComparatorObj = secSplit[0]
+		comp.Value = secSplit[1]
 		resultObj = append(resultObj, comp)
 	}
-
 	return
 }
