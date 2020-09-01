@@ -4,8 +4,8 @@ This project aims to allow interaction with the MySQL database over HTTP
 ## What is it?
 
 To interact wit the `mysql` database it requires you to either access it via the 
-work-bench or on the `cmd-line/terminal` through `mysql` cli. This for simple operation
-is cumbersome and so this was born to solve that, e.g.
+work-bench or on the `cmd-line/terminal` through `mysql` CLI module. This for simple operation
+is cumbersome and so this was project born to solve that, e.g.
 
 To `SELECT * from users`, you simply do
 ```
