@@ -94,7 +94,7 @@ func HandleGetOneOrMany(w http.ResponseWriter, r *http.Request) {
 
 	result, err := database.GetData(query)
 
-	client.WriteToClient(result) //passes the chan to write it to client
+	client.WriteToClient(w, result) //passes the chan to write it to client
 
 	w.WriteHeader(http.StatusOK)
 

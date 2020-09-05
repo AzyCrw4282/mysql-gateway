@@ -2,6 +2,7 @@ package queryHandlers
 
 import (
 	"fmt"
+	"github.com/sirupsen/logrus"
 	"strings"
 )
 
@@ -42,9 +43,6 @@ func SplitUrlWithExclusion(url string) []string {
    Input -> [users,a=eq.b,c=gt.d] ( `,` separates an `&`)
    Output -> resultsquery of all splits consisting of field, and all fields using type comparators (struct)
 */
-
-//limits value, (select?) and others not in the splits
-//Iterates through and updates it to resultObj as an array of comparators object
 func SplitsToCohesiveForm(splitdata []string, resultQuery Query) (resultObj []comparators, err error) {
 
 	for index, elem := range splitdata {
@@ -60,9 +58,10 @@ func SplitsToCohesiveForm(splitdata []string, resultQuery Query) (resultObj []co
 		if len(secSplit) == 1 {
 			AggregateFunc, err := resultQuery.ProcessAggregateValues(data[0], secSplit[0])
 			if err != nil {
+				logrus.Error(err)
 				return
 			}
-			fmt.Print(AggregateFunc, "Boolean eval of aggreate or limit functions")
+			fmt.Print(AggregateFunc, "Boolean eval of aggregate or limit functions")
 			continue
 		}
 		comp.ComparatorObj = secSplit[0]
