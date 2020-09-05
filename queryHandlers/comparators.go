@@ -7,5 +7,21 @@ type comparators struct {
 	Value         string //y, any operands
 }
 
-//possible methods using receiver objects
-///get for all fields
+//keyMap
+var symbolsValues = map[string]string{
+	"gt":    ">",
+	"lt":    "<",
+	"lte":   "<=",
+	"gte":   ">=",
+	"eq":    "=",
+	"NotEq": "!=",
+}
+
+/*
+ Returns the actual value in hashmap for SQL use
+*/
+func (c *comparators) ComparatorToSQL() string {
+	return symbolsValues[c.ComparatorObj]
+}
+
+//Methods to be added

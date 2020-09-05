@@ -13,15 +13,6 @@ Consists of:
 	And methods for:
 					---select, ---upadte, --where,
 */
-//keyMap
-var symbolsValues = map[string]string{
-	"gt":    ">",
-	"lt":    "<",
-	"lte":   "<=",
-	"gte":   ">=",
-	"eq":    "=",
-	"NotEq": "!=",
-}
 
 //struct obj for queries
 type Query struct {
