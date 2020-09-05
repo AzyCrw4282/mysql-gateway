@@ -30,8 +30,6 @@ Or
 - delete where field=<value>,
 - insert operation
 
--- For all above, be able to limit results
-
 - get filtered values from multiple columns
 
 -- For all above, perform aggregate function
@@ -106,10 +104,6 @@ curl http://localhost:8080/getTable=users
 
 
 - Perform operations on relational table 
-
-
-
-
 
 #### Acknowledgements
 
