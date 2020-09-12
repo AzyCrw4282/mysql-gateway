@@ -1,6 +1,6 @@
 module github.com/AzyCrw4282/mysql-gateway
 
-go 1.12
+go 1.13 // dev 1.13.5
 
 require (
 	github.com/bcicen/jstream v0.0.0-20190220045926-16c1f8af81c2
@@ -21,4 +21,8 @@ require (
 	golang.org/x/crypto v0.0.0-20190701094942-4def268fd1a4 // indirect
 	golang.org/x/text v0.3.2 // indirect
 	gopkg.in/check.v1 v1.0.0-20200227125254-8fa46927fb4f // indirect
+
+	// Add relevant ones mentioend in readme.md
+
+
 )
