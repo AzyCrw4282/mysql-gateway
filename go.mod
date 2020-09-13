@@ -22,7 +22,6 @@ require (
 	golang.org/x/text v0.3.2 // indirect
 	gopkg.in/check.v1 v1.0.0-20200227125254-8fa46927fb4f // indirect
 
-	// Add relevant ones mentioend in readme.md
-
+// Add relevant ones mentioend in readme.md
 
 )

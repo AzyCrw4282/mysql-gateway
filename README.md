@@ -1,4 +1,7 @@
+<img align="right" width="400" height="250" src="docs/GoMySQL.jpg" />
+
 This project aims to allow interaction with the MySQL database over HTTP.
+
 ## What is it?
 
 To interact wit the `mysql` database it requires you to either access it via the 
