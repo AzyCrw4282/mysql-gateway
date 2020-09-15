@@ -9,7 +9,7 @@ import (
 	"mysql-gateway/database"
 	"net/http"
 	"os"
-	//"github.com/AzyCrw4282/mysql-gateway/api"
+	//"github.com/AzyCrw4282/mysql-gateway/api" for final version
 )
 
 /*

@@ -21,12 +21,11 @@ func UpdateData() {
 
 /* Return a channel of bytes of the results, then fed into writerResponse module
 * Input: A comparator object: Field, comparatorObj( operator) and value
-* Output:
+* Output: returns the final results, i.e. whatever returned by the mysql-driver-API
  */
 func GetData(q queryHandlers.Query) (results chan []byte, err error) {
 
 	return results, err
-
 }
 
 func GetDataFields(table string, field string, id int) {

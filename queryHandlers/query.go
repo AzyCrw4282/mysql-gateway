@@ -11,7 +11,7 @@ Consists of:
 	equalities cmparison HM
 	a struct for query
 	And methods for:
-					---select, ---upadte, --where,
+		---select, ---upadte, --where,
 */
 
 //struct obj for queries
