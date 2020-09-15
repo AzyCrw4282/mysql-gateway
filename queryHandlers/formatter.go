@@ -41,7 +41,7 @@ func SplitUrlWithExclusion(url string) []string {
 
 /* Formats and updates the string using comparator struct and saving values to the relevant fields
    Input -> [users,a=eq.b,c=gt.d] ( `,` separates an `&`)
-   Output -> resultsquery of all splits consisting of field, and all fields using type comparators (struct)
+   Output -> results query of all splits, consisting of field, and all fields using type comparators (struct)
 */
 func SplitsToCohesiveForm(splitdata []string, resultQuery Query) (resultObj []comparators, err error) {
 

@@ -5,8 +5,7 @@ import (
 )
 
 /*
-This will exec all prepared statements for all methods ops below.
-
+This will exec all prepared statements for all methods operations below.
 */
 func InsertData() {
 
@@ -20,7 +19,10 @@ func UpdateData() {
 
 }
 
-//return a channel of byes
+/* Return a channel of bytes of the results, then fed into writerResponse module
+* Input: A comparator object: Field, comparatorObj( operator) and value
+* Output:
+ */
 func GetData(q queryHandlers.Query) (results chan []byte, err error) {
 
 	return results, err
