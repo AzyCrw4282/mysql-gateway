@@ -59,7 +59,7 @@ func parseString(vars map[string]string) (table string, field string, id int) {
 	case 2:
 		field = vars["field"]
 	case 1:
-		id, _ = strconv.Atoi(vars["id"]) //can use atoi, or itoa for the reversal ops
+		id, _ = strconv.Atoi(vars["id"]) //can use ascii to integer -> atoi, or itoa for the reversal ops
 	}
 	return
 
@@ -93,9 +93,7 @@ func HandleGetOneOrMany(w http.ResponseWriter, r *http.Request) {
 	}
 
 	result, err := database.GetData(query)
-
 	client.WriteToClient(w, result) //passes the chan to write it to client
-
 	w.WriteHeader(http.StatusOK)
 
 }
@@ -110,9 +108,7 @@ func HandleDelete(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("You are missing an empty field.")
 		http.Error(w, "Error with your request /{entity}", http.StatusBadRequest)
 	}
-
 	database.DeleteData()
-
 	w.WriteHeader(http.StatusOK)
 
 }
@@ -127,9 +123,7 @@ func HandleInsert(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("You are missing an empty field.")
 
 	}
-
 	database.InsertData()
-
 	w.WriteHeader(http.StatusOK)
 
 }
@@ -146,7 +140,6 @@ func HandleUpdate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	database.UpdateData()
-
 	w.WriteHeader(http.StatusOK)
 
 }

@@ -1,6 +1,7 @@
 package main
 
-import ( //have used lcoal imports instead of github/.../..
+//have used local imports instead of github/.../..
+import (
 	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
