@@ -25,6 +25,8 @@ func UpdateData() {
  */
 func GetData(q queryHandlers.Query) (results chan []byte, err error) {
 
+	//call to -> formatSelectStmt()
+
 	return results, err
 }
 
