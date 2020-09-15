@@ -43,6 +43,10 @@ func (q *Query) formatSelectStmt() (queryStmt string, bindArray []interface{}) {
 Check for single/multiple selects and update accordingly
 */
 func generateSelect(selectVal []string) (selectString string) {
+	selectString = "SELECT"
+	if len(selectVal) == 0 {
+		selectString += ""
+	}
 
 	return
 }
