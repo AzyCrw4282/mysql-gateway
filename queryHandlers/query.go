@@ -28,7 +28,6 @@ type Query struct {
    output: p1: the formatted string. p2: bindedArrayData for (possible?) use!
 */
 func (q *Query) formatSelectStmt() (queryStmt string, bindArray []interface{}) {
-	//generate select
 	queryStmt = generateSelect(q.Select)
 	queryStmt += "FROM " + string(q.Table) + "as tbl"
 
@@ -39,13 +38,17 @@ func (q *Query) formatSelectStmt() (queryStmt string, bindArray []interface{}) {
 	return
 }
 
-/*
+/* TODO: start with the unit tests and build it there on....
 Check for single/multiple selects and update accordingly
+** For more than 1 select, requires nested selects which needs to be formatted accordingly...
 */
 func generateSelect(selectVal []string) (selectString string) {
-	selectString = "SELECT"
+	selectString = "SELECT "
 	if len(selectVal) == 0 {
 		selectString += ""
+	} else {
+		//code to handle nested select in SQL without row_tojson Format
+
 	}
 
 	return
