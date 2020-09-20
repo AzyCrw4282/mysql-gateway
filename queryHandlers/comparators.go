@@ -1,7 +1,7 @@
 package queryHandlers
 
 // input string x=eq.y
-type comparators struct {
+type Comparators struct {
 	Field         string //x, field name
 	ComparatorObj string //eq, any operator
 	Value         string //y, any operands
@@ -20,7 +20,7 @@ var symbolsValues = map[string]string{
 /*
  Returns the actual value in hashmap for SQL use
 */
-func (c *comparators) ComparatorToSQL() string {
+func (c *Comparators) ComparatorToSQL() string {
 	return symbolsValues[c.ComparatorObj]
 }
 

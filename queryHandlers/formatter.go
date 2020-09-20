@@ -12,10 +12,10 @@ func GetQueryFromUrl(url string) (resultQuery Query, err error) {
 
 	resultQuery = Query{
 		Table:       splitURL[0],
-		comparisons: []comparators{}, // comparator struct to hold the value of the
+		Comparisons: []comparators{}, // comparator struct to hold the value of the
 	}
 	//pass pointer of the results?
-	resultQuery.comparisons, err = SplitsToCohesiveForm(splitURL, resultQuery)
+	resultQuery.Comparisons, err = SplitsToCohesiveForm(splitURL, resultQuery)
 
 	return
 }
