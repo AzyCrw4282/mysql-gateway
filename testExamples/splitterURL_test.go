@@ -139,3 +139,9 @@ func TestComplexUnitForSplitters(t *testing.T) {
 		t.Fail()
 	}
 }
+
+/*
+Add tests for:
+	Single Limit checks
+	Select stmt checks - (TODO: single and multi)
+*/
