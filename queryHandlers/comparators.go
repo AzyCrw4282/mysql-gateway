@@ -15,6 +15,7 @@ var symbolsValues = map[string]string{
 	"gte":   ">=",
 	"eq":    "=",
 	"NotEq": "!=",
+	"is":    "is",
 }
 
 /*

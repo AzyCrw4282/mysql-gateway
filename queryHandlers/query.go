@@ -13,8 +13,8 @@ All types in Go satisfy an empty interface (interface{} is an empty interface).
 
 //struct obj for queries
 type Query struct {
-	Table       string
-	Column      string
+	Table string
+	//Column      string
 	Select      []string // only applies for MULTI select ( of nested types)
 	Limit       int
 	Comparisons []Comparators

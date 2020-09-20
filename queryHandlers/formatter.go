@@ -12,7 +12,7 @@ func GetQueryFromUrl(url string) (resultQuery Query, err error) {
 
 	resultQuery = Query{
 		Table:       splitURL[0],
-		Comparisons: []comparators{}, // comparator struct to hold the value of the
+		Comparisons: []Comparators{}, // comparator struct to hold the value of the
 	}
 	//pass pointer of the results?
 	resultQuery.Comparisons, err = SplitsToCohesiveForm(splitURL, resultQuery)
@@ -43,13 +43,13 @@ func SplitUrlWithExclusion(url string) []string {
    Input -> [users,a=eq.b,c=gt.d] ( `,` separates an `&`)
    Output -> results query of all splits, consisting of field, and all fields using type comparators (struct)
 */
-func SplitsToCohesiveForm(splitdata []string, resultQuery Query) (resultObj []comparators, err error) {
+func SplitsToCohesiveForm(splitdata []string, resultQuery Query) (resultObj []Comparators, err error) {
 	for index, elem := range splitdata {
 		if index == 0 { // skip table name as it is already added
 			continue
 		}
 		data := strings.Split(elem, "=")
-		comp := comparators{
+		comp := Comparators{
 			Field: data[0],
 		}
 		secSplit := strings.Split(data[1], ".") //if no `.` means an aggregate function and it wont split and resolves existing element to the array
