@@ -44,7 +44,6 @@ func SplitUrlWithExclusion(url string) []string {
    Output -> results query of all splits, consisting of field, and all fields using type comparators (struct)
 */
 func SplitsToCohesiveForm(splitdata []string, resultQuery Query) (resultObj []comparators, err error) {
-
 	for index, elem := range splitdata {
 		if index == 0 { // skip table name as it is already added
 			continue
