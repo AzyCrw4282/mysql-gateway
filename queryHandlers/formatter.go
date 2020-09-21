@@ -9,11 +9,12 @@ import (
 //Allows to 1) BuildTheQuery, by breaking it into components of the `r` module
 func GetQueryFromUrl(url string) (resultQuery Query, err error) {
 	splitURL := SplitUrlWithExclusion(url)
-
 	resultQuery = Query{
 		Table:       splitURL[0],
 		Comparisons: []Comparators{}, // comparator struct to hold the value of the
 	}
+	fmt.Println("AA->", resultQuery.Table, resultQuery.Comparisons)
+	logrus.Println("AA->", resultQuery.Table, resultQuery.Comparisons)
 	//pass pointer of the results?
 	resultQuery.Comparisons, err = SplitsToCohesiveForm(splitURL, resultQuery)
 
@@ -55,8 +56,8 @@ func SplitsToCohesiveForm(splitdata []string, resultQuery Query) (resultObj []Co
 		secSplit := strings.Split(data[1], ".") //if no `.` means an aggregate function and it wont split and resolves existing element to the array
 		//check for Limit or aggregate function
 		if len(secSplit) == 1 {
-			AggregateFunc, err := resultQuery.ProcessAggregateValues(data[0], secSplit[0])
-			if err != nil {
+			AggregateFunc, Innererr := resultQuery.ProcessAggregateValues(data[0], secSplit[0])
+			if Innererr != nil {
 				logrus.Error(err)
 				return
 			}

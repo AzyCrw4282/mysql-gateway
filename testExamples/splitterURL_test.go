@@ -84,7 +84,7 @@ func TestMidUnitForSplitters(t *testing.T) {
  * Output: Pass/fail assertion of all test cases
  */
 func TestComplexUnitForSplitters(t *testing.T) {
-	urlString := "Nums?Number=eq.10&EvenNumber=is.True&NumberType=eq.Even&LIMIT=3"
+	urlString := "Nums?Number=eq.10&EvenNumber=is.True&NumberType=eq.Even&LIMIT=100"
 	query, err := queryHandlers.GetQueryFromUrl(urlString)
 	if err != nil {
 		t.Error("Error!!! Failed to parse and split a perfect string") //eq = log, followed by fail
@@ -98,7 +98,7 @@ func TestComplexUnitForSplitters(t *testing.T) {
 		t.Log("Failed to obtain the required comparators value")
 		t.Fail()
 	}
-	if query.Limit != 10 {
+	if query.Limit != 100 {
 		t.Log("Obtained a wrong LIMIT value for the query")
 		t.Fail()
 	}
