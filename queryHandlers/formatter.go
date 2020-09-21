@@ -1,6 +1,5 @@
-package main // used for debugging. TBC to below once done..
+package queryHandlers
 
-//package queryHandlers
 import (
 	"fmt"
 	"github.com/sirupsen/logrus"

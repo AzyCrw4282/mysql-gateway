@@ -1,7 +1,7 @@
 package main
 
 import (
-	query2 "mysql-gateway/queryHandlers"
+	query2 "mysql-gateway/queryHandlers" // Aliased import names. used for main package reference instead of original name
 	"testing"
 )
 

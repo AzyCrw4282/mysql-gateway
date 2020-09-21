@@ -1,4 +1,4 @@
-package main
+package queryHandlers
 
 // input string x=eq.y
 type Comparators struct {
