@@ -1,4 +1,4 @@
-package queryHandlers
+package main
 
 import (
 	"errors"

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"mysql-gateway/queryHandlers"
+	query2 "mysql-gateway/queryHandlers"
 	"testing"
 )
 
@@ -11,7 +11,7 @@ import (
  */
 func TestSimpleUnitForSplitters(t *testing.T) {
 	urlString := "entity?Number=eq.10"
-	query, err := queryHandlers.GetQueryFromUrl(urlString)
+	query, err := query2.GetQueryFromUrl(urlString)
 	if err != nil {
 		t.Error("Error!!! Failed to parse and split a perfect string") //eq = log, followed by fail
 		return
@@ -48,7 +48,7 @@ func TestSimpleUnitForSplitters(t *testing.T) {
  */
 func TestMidUnitForSplitters(t *testing.T) {
 	urlString := "Nums?Number=eq.10&EvenNumber=is.True"
-	query, err := queryHandlers.GetQueryFromUrl(urlString)
+	query, err := query2.GetQueryFromUrl(urlString)
 	if err != nil {
 		t.Error("Error!!! Failed to parse and split a perfect string") //eq = log, followed by fail
 		return
@@ -85,7 +85,7 @@ func TestMidUnitForSplitters(t *testing.T) {
  */
 func TestComplexUnitForSplitters(t *testing.T) {
 	urlString := "Nums?Number=eq.10&EvenNumber=is.True&NumberType=eq.Even&LIMIT=100"
-	query, err := queryHandlers.GetQueryFromUrl(urlString)
+	query, err := query2.GetQueryFromUrl(urlString)
 	if err != nil {
 		t.Error("Error!!! Failed to parse and split a perfect string") //eq = log, followed by fail
 		return
