@@ -5,7 +5,6 @@ import (
 	"testing"
 )
 
-//TODO: Fix error with ide dedbugger........
 /*The splitterURLTest focuses on the parsing and splitting of the given URL string.
  * Input: http/https://localhost:8080/entity?id=eq.10
  * Output: Pass/fail assertion of all test cases
@@ -100,7 +99,7 @@ func TestComplexUnitForSplitters(t *testing.T) {
 		t.Fail()
 	}
 	if query.Limit != 100 {
-		t.Log("Obtained a wrong LIMIT value for the query")
+		t.Log("Obtained a wrong LIMIT value for the query, GOT ", query.Limit)
 		t.Fail()
 	}
 	if query.Comparisons[0].Field != "Number" {
@@ -115,7 +114,7 @@ func TestComplexUnitForSplitters(t *testing.T) {
 		t.Log("Wrong passed value obtained. Got ", query.Comparisons[0].Value, " Expected ", "10")
 		t.Fail()
 	}
-	if query.Comparisons[1].Field != "Number" {
+	if query.Comparisons[1].Field != "EvenNumber" {
 		t.Log("Obtained a wrong field. Got: ", query.Comparisons[1].Field, " Expected: ", "Number ")
 		t.Fail()
 	}
@@ -139,6 +138,7 @@ func TestComplexUnitForSplitters(t *testing.T) {
 		t.Log("Wrong passed value obtained. Got ", query.Comparisons[2].Value, " Expected ", "Even")
 		t.Fail()
 	}
+	t.Log("Successful")
 }
 
 /*
