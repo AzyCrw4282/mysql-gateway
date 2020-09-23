@@ -2,8 +2,9 @@ package queryHandlers
 
 import (
 	"fmt"
-	"github.com/sirupsen/logrus"
 	"strings"
+
+	"github.com/sirupsen/logrus"
 )
 
 //Allows to 1) BuildTheQuery, by breaking it into components of the `r` module
@@ -13,10 +14,8 @@ func GetQueryFromUrl(url string) (resultQuery Query, err error) {
 		Table:       splitURL[0],
 		Comparisons: []Comparators{}, // comparator struct to hold the value of the
 	}
-	fmt.Println("AA->", resultQuery.Table, resultQuery.Comparisons)
-	logrus.Println("AA->", resultQuery.Table, resultQuery.Comparisons)
 	//pass pointer of the results?
-	resultQuery.Comparisons, err = SplitsToCohesiveForm(splitURL, resultQuery)
+	resultQuery, err = SplitsToCohesiveForm(resultQuery, splitURL)
 
 	return
 }
@@ -43,7 +42,7 @@ func SplitUrlWithExclusion(url string) []string {
    Input -> [users,a=eq.b,c=gt.d] ( `,` separates an `&`)
    Output -> results query of all splits, consisting of field, and all fields using type comparators (struct)
 */
-func SplitsToCohesiveForm(splitdata []string, resultQuery Query) (resultObj []Comparators, err error) {
+func SplitsToCohesiveForm(resultQuery Query, splitdata []string) (resultObj Query, err error) {
 	for index, elem := range splitdata {
 		if index == 0 { // skip table name as it is already added
 			continue
@@ -55,17 +54,17 @@ func SplitsToCohesiveForm(splitdata []string, resultQuery Query) (resultObj []Co
 		secSplit := strings.Split(data[1], ".") //if no `.` means an aggregate function and it wont split and resolves existing element to the array
 		//check for Limit or aggregate function
 		if len(secSplit) == 1 {
-			AggregateFunc, Innererr := resultQuery.ProcessAggregateValues(data[0], secSplit[0])
+			_, Innererr := resultQuery.ProcessAggregateValues(data[0], secSplit[0])
 			if Innererr != nil {
 				logrus.Error(err)
 				return
 			}
-			fmt.Print(AggregateFunc, "Boolean eval of aggregate or limit functions")
+			fmt.Print("Boolean eval of aggregate or limit functions SET")
 			continue
 		}
 		comp.ComparatorObj = secSplit[0]
 		comp.Value = secSplit[1]
-		resultObj = append(resultObj, comp)
+		resultQuery.Comparisons = append(resultQuery.Comparisons, comp)
 	}
 	return
 }
