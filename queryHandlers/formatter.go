@@ -27,14 +27,13 @@ output: [users,a=eq.b,c=gt.d] ( `,` separates an `&`)
 */
 func SplitUrlWithExclusion(url string) []string {
 	splitResult := strings.Split(url, "?")
-
 	if len(splitResult) == 1 { //no split char present
 		return splitResult
 	}
-
-	splitArrayResult := make([]string, 10)
+	splitArrayResult := make([]string, 1)
+	splitArrayResult[0] = splitResult[0]
 	secondSplit := strings.Split(splitResult[1], "&")
-	splitArrayResult = append(splitArrayResult, splitResult[0]) //adds entity/table name
+	//splitArrayResult = append(splitArrayResult, splitResult[0]) //adds entity/table name
 	splitArrayResult = append(splitArrayResult, secondSplit...) //passes in a variadic function
 
 	return splitArrayResult

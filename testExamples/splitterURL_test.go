@@ -5,6 +5,7 @@ import (
 	"testing"
 )
 
+//TODO: Fix error with ide dedbugger........
 /*The splitterURLTest focuses on the parsing and splitting of the given URL string.
  * Input: http/https://localhost:8080/entity?id=eq.10
  * Output: Pass/fail assertion of all test cases
