@@ -65,6 +65,6 @@ func SplitsToCohesiveForm(resultQuery *Query, splitdata []string) (resultObj Que
 		comp.Value = secSplit[1]
 		resultQuery.Comparisons = append(resultQuery.Comparisons, comp)
 	}
-	resultObj = *resultQuery //derefernce the val
+	resultObj = *resultQuery //dereference the val
 	return
 }

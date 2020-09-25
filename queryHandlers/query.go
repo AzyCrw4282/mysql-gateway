@@ -15,7 +15,7 @@ All types in Go satisfy an empty interface (interface{} is an empty interface).
 type Query struct {
 	Table string
 	//Column      string
-	Select      []string // only applies for MULTI select ( of nested types)
+	Select      []string // for multi case, in which SELECT stores the extra fields
 	Limit       int
 	Comparisons []Comparators
 }

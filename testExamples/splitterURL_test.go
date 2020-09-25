@@ -144,11 +144,41 @@ func TestComplexUnitForSplitters(t *testing.T) {
 /*
 Add tests for:
 	Single Limit checks
-	Select stmt checks - (TODO: single and multi)
+	SELECT stmt checks - (TODO: single and multi)
 */
 
 func TestLimitFuncforSplitters(t *testing.T) {
 	url := "Numbers?Limit=5"
+	query, err := query2.GetQueryFromUrl(url)
+
+	if err != nil {
+		t.Error("Can't parse a simple LIMIT query") //eq = log, followed by fail
+		return
+	}
+
+	if query.Limit != 5 && query.Table != "Numbers" {
+		t.Log("Wrong LIMIT or TABLE value obtained", " Got ", query.Limit, " table-> ", query.Table)
+		t.Fail()
+	}
+
+}
+
+func TestSelectFuncforSplitters(t *testing.T) {
+	url := "Nums?Number=eq.10&EvenNumber=is.True&Select=NumberID,NumValues"
+	query, err := query2.GetQueryFromUrl(url)
+
+	if err != nil {
+		t.Error("Can't parse the given url. Error-> ", err) //eq = log, followed by fail
+		return
+	}
+	if len(query.Select) != 2 {
+		t.Log("Query select fields returned wrong value. Expected 2, Got, ", len(query.Select))
+		t.Fail()
+	}
+}
+
+func TestCompoundSelectFuncforSplitters(t *testing.T) {
+	url := "Nums?Number=eq.10&EvenNumber=is.True&NumberType=eq.Even&LIMIT=100"
 	query, err := query2.GetQueryFromUrl(url)
 
 	if err != nil {
