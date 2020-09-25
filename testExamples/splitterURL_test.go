@@ -146,3 +146,19 @@ Add tests for:
 	Single Limit checks
 	Select stmt checks - (TODO: single and multi)
 */
+
+func TestLimitFuncforSplitters(t *testing.T) {
+	url := "Numbers?Limit=5"
+	query, err := query2.GetQueryFromUrl(url)
+
+	if err != nil {
+		t.Error("Can't parse a simple LIMIT query") //eq = log, followed by fail
+		return
+	}
+
+	if query.Limit != 5 && query.Table != "Numbers" {
+		t.Log("Wrong LIMIT or TABLE value obtained", " Got ", query.Limit, " table-> ", query.Table)
+		t.Fail()
+	}
+
+}
