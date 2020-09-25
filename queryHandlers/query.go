@@ -16,7 +16,7 @@ type Query struct {
 	Table string
 	//Column      string
 	Select      []string // for multi case, in which SELECT stores the extra fields
-	Limit       int
+	Limit       int      // need to be expanded to allow for multiple LIMIT queries
 	Comparisons []Comparators
 }
 
@@ -59,8 +59,8 @@ func (q *Query) ProcessAggregateValues(aggFunc string, value string) (exists boo
 		intLimit, _ := strconv.Atoi(value)
 		q.Limit = intLimit
 		return
-	} else if aggFunc == "select" {
-		q.Select = strings.Split(value, "")
+	} else if strings.ToLower(aggFunc) == "select" {
+		q.Select = strings.Split(value, ",")
 		return
 	}
 	err = errors.New("Error processing parameters: AggFunc-> " + aggFunc + " and value-> " + value)

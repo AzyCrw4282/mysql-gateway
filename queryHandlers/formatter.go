@@ -2,9 +2,8 @@ package queryHandlers
 
 import (
 	"fmt"
-	"strings"
-
 	"github.com/sirupsen/logrus"
+	"strings"
 )
 
 //Allows to 1) BuildTheQuery, by breaking it into components of the `r` module
@@ -58,7 +57,7 @@ func SplitsToCohesiveForm(resultQuery *Query, splitdata []string) (resultObj Que
 				logrus.Error(err)
 				return
 			}
-			fmt.Print("Boolean eval of aggregate or limit functions SET")
+			//fmt.Print("Boolean eval of aggregate or limit functions SET") -- Interfers with STDOUT during test.
 			continue
 		}
 		comp.ComparatorObj = secSplit[0]

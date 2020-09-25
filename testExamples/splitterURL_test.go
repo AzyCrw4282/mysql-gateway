@@ -83,7 +83,7 @@ func TestMidUnitForSplitters(t *testing.T) {
  * Input: http/https://localhost:8080/entity?Number=eq.10&EvenNumber=is.True
  * Output: Pass/fail assertion of all test cases
  */
-func TestComplexUnitForSplitters(t *testing.T) {
+func TestMidUnitForSplitter(t *testing.T) {
 	urlString := "Nums?Number=eq.10&EvenNumber=is.True&NumberType=eq.Even&LIMIT=100"
 	query, err := query2.GetQueryFromUrl(urlString)
 	if err != nil {
@@ -141,12 +141,6 @@ func TestComplexUnitForSplitters(t *testing.T) {
 	t.Log("Successful")
 }
 
-/*
-Add tests for:
-	Single Limit checks
-	SELECT stmt checks - (TODO: single and multi)
-*/
-
 func TestLimitFuncforSplitters(t *testing.T) {
 	url := "Numbers?Limit=5"
 	query, err := query2.GetQueryFromUrl(url)
@@ -178,7 +172,7 @@ func TestSelectFuncforSplitters(t *testing.T) {
 }
 
 func TestCompoundSelectFuncforSplitters(t *testing.T) {
-	url := "Nums?Number=eq.10&EvenNumber=is.True&NumberType=eq.Even&LIMIT=100"
+	url := "Nums?Number=eq.10&EvenNumber=is.True&NumberType=eq.Even&Select=NumberID,NumValues,EvenNums,OddNums&LIMIT=100"
 	query, err := query2.GetQueryFromUrl(url)
 
 	if err != nil {
@@ -186,7 +180,7 @@ func TestCompoundSelectFuncforSplitters(t *testing.T) {
 		return
 	}
 
-	if query.Limit != 5 && query.Table != "Numbers" {
+	if query.Limit != 100 && query.Table != "Nums" {
 		t.Log("Wrong LIMIT or TABLE value obtained", " Got ", query.Limit, " table-> ", query.Table)
 		t.Fail()
 	}
