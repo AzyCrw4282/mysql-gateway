@@ -57,7 +57,7 @@ func SplitsToCohesiveForm(resultQuery *Query, splitdata []string) (resultObj Que
 				logrus.Error(err)
 				return
 			}
-			//fmt.Print("Boolean eval of aggregate or limit functions SET") -- Interfers with STDOUT during test.
+			fmt.Println("Boolean eval of aggregate or limit functions SET") //-- using print() interfers with line interrupt so add \n break or use println
 			continue
 		}
 		comp.ComparatorObj = secSplit[0]
