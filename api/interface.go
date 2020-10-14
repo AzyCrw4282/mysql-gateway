@@ -22,7 +22,7 @@ finally write the header using responseWriter and give a stuaus code
 func processString(w http.ResponseWriter, vars map[string]string, expectedCode int) (err error) {
 
 	//entity,table check
-	var error error
+	//var error error
 	for k, v := range vars {
 		fmt.Println("k", k, "v", v)
 
@@ -48,7 +48,7 @@ func processString(w http.ResponseWriter, vars map[string]string, expectedCode i
 
 	}
 	http.Error(w, "Error with your request /{entity}", http.StatusBadRequest)
-	return error
+	return
 }
 
 func parseString(vars map[string]string) (table string, field string, id int) {

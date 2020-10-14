@@ -11,7 +11,6 @@ interface{} means you can put value of any type, including your own custom type.
 All types in Go satisfy an empty interface (interface{} is an empty interface).
 */
 
-//struct obj for queries
 type Query struct {
 	Table       string
 	Select      []string // for multi case, in which SELECT stores the extra fields
@@ -31,7 +30,7 @@ func (q *Query) formatSelectStmt() (queryStmt string, bindArray []interface{}) {
 	queryStmt, bindArray = generateWhere(q, queryStmt)
 
 	if q.Limit != 0 {
-		queryStmt += "LIMIT " + strconv.Itoa(q.Limit)
+		queryStmt += "LIMIT $" + strconv.Itoa(q.Limit)
 		bindArray = append(bindArray, strconv.Itoa(q.Limit))
 	}
 	return
@@ -39,7 +38,6 @@ func (q *Query) formatSelectStmt() (queryStmt string, bindArray []interface{}) {
 
 /*
 Check for single/multiple selects and update accordingly
-** For more than 1 select, requires nested selects which needs to be formatted...
 ** Ref here  -> https://stackoverflow.com/questions/1775168/multiple-select-statements-in-single-query
 */
 func generateSelect(selectVal []string, q *Query) (selectString string) {
