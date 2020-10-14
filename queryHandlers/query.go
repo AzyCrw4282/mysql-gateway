@@ -19,7 +19,7 @@ type Query struct {
 	Comparisons []Comparators
 }
 
-//SQL syntax: SELECT column_name(s) FROM table_name WHERE condition LIMIT number;
+//SQL syntax: SELECT column_name(s) FROM table_name WHERE (condition) LIMIT number;
 
 /* SELECT stmt formatter - create string, add in table and call to Where() to formatter WHERE
    Limit should also be appended to the string POST-where operation using relevant field
@@ -28,6 +28,7 @@ type Query struct {
 func (q *Query) formatSelectStmt() (queryStmt string, bindArray []interface{}) {
 	queryStmt = generateSelect(q.Select, q)
 	queryStmt += "FROM " + string(q.Table) + "as tbl"
+	queryStmt,bindArray = generateWhere(q,bindArray,queryStmt)
 
 	if q.Limit != 0 {
 		queryStmt += "LIMIT " + strconv.Itoa(q.Limit)
@@ -55,6 +56,25 @@ func generateSelect(selectVal []string, q *Query) (selectString string) {
 			selectString += selectStmt
 		}
 		selectString += ") AS mainQuery"
+	}
+	return
+}
+
+//generate WHERE stmt using comparisons objects
+func generateWhere(q *Query,bindArr []interface{},queryString string,) (whereString string, []interface{}){
+	whereString := queryString
+	if len(q.Comparisons)==0{ //if no comparators no Where clause needed
+		return whereString,bindArr
+	}
+	whereString += "WHERE "
+
+	for ind, compObj := range q.Comparisons{
+		if ind != 0{
+			whereString += "AND "
+		}
+		//forms the where query for each check
+		whereString +=compObj.Field + " " + compObj.ComparatorObj + "$" + strconv.Itoa(ind)
+		bindArr = append(bindArr,compObj.Value)
 	}
 	return
 }
