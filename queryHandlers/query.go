@@ -26,7 +26,7 @@ type Query struct {
    output: p1: the formatted string. p2: bindedArrayData for (possible?) use!
 */
 func (q *Query) formatSelectStmt() (queryStmt string, bindArray []interface{}) {
-	queryStmt = generateSelect(q.Select)
+	queryStmt = generateSelect(q.Select, q)
 	queryStmt += "FROM " + string(q.Table) + "as tbl"
 
 	if q.Limit != 0 {
@@ -38,14 +38,23 @@ func (q *Query) formatSelectStmt() (queryStmt string, bindArray []interface{}) {
 
 /*
 Check for single/multiple selects and update accordingly
-** For more than 1 select, requires nested selects which needs to be formatted accordingly...
+** For more than 1 select, requires nested selects which needs to be formatted...
+** Ref here  -> https://stackoverflow.com/questions/1775168/multiple-select-statements-in-single-query
 */
-func generateSelect(selectVal []string) (selectString string) {
+func generateSelect(selectVal []string, q *Query) (selectString string) {
 	selectString = "SELECT "
 	if len(selectVal) == 0 {
-		selectString += ""
+		selectString += "AS inst"
 	} else {
-		//code to handle nested select in SQL without row_tojson Format
+		//code to handle nested select in SQL without row_to_json Format
+		selectString += "(SELECT (tbl."
+		for id, selectStmt := range q.Select {
+			if id != 0 {
+				selectString += ", tbl."
+			}
+			selectString += selectStmt
+		}
+		selectString += ") AS mainQuery"
 	}
 	return
 }
