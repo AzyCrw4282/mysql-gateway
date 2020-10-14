@@ -13,8 +13,7 @@ All types in Go satisfy an empty interface (interface{} is an empty interface).
 
 //struct obj for queries
 type Query struct {
-	Table string
-	//Column      string
+	Table       string
 	Select      []string // for multi case, in which SELECT stores the extra fields
 	Limit       int      // need to be expanded to allow for multiple LIMIT queries
 	Comparisons []Comparators
@@ -37,7 +36,7 @@ func (q *Query) formatSelectStmt() (queryStmt string, bindArray []interface{}) {
 	return
 }
 
-/* TODO: start with the unit tests and build it there on....
+/*
 Check for single/multiple selects and update accordingly
 ** For more than 1 select, requires nested selects which needs to be formatted accordingly...
 */
@@ -47,9 +46,7 @@ func generateSelect(selectVal []string) (selectString string) {
 		selectString += ""
 	} else {
 		//code to handle nested select in SQL without row_tojson Format
-
 	}
-
 	return
 }
 
