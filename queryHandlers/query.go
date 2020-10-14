@@ -28,7 +28,7 @@ type Query struct {
 func (q *Query) formatSelectStmt() (queryStmt string, bindArray []interface{}) {
 	queryStmt = generateSelect(q.Select, q)
 	queryStmt += "FROM " + string(q.Table) + "as tbl"
-	queryStmt,bindArray = generateWhere(q,bindArray,queryStmt)
+	queryStmt, bindArray = generateWhere(q, queryStmt)
 
 	if q.Limit != 0 {
 		queryStmt += "LIMIT " + strconv.Itoa(q.Limit)
@@ -61,20 +61,19 @@ func generateSelect(selectVal []string, q *Query) (selectString string) {
 }
 
 //generate WHERE stmt using comparisons objects
-func generateWhere(q *Query,bindArr []interface{},queryString string,) (whereString string, []interface{}){
-	whereString := queryString
-	if len(q.Comparisons)==0{ //if no comparators no Where clause needed
-		return whereString,bindArr
+func generateWhere(q *Query, queryString string) (whereString string, bindArr []interface{}) {
+	whereString = " " + queryString
+	if len(q.Comparisons) == 0 { //if no comparators no Where clause needed
+		return
 	}
 	whereString += "WHERE "
-
-	for ind, compObj := range q.Comparisons{
-		if ind != 0{
+	for ind, compObj := range q.Comparisons {
+		if ind != 0 {
 			whereString += "AND "
 		}
 		//forms the where query for each check
-		whereString +=compObj.Field + " " + compObj.ComparatorObj + "$" + strconv.Itoa(ind)
-		bindArr = append(bindArr,compObj.Value)
+		whereString += compObj.Field + " " + compObj.ComparatorObj + "$" + strconv.Itoa(ind) // Poss?-> compObj.Value
+		bindArr = append(bindArr, compObj.Value)
 	}
 	return
 }
