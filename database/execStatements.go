@@ -35,7 +35,7 @@ func GetData(q queryHandlers.Query) (results chan []byte, err error) {
 	if err != nil {
 		logrus.Errorln(sqlQuery)
 		logrus.Errorln(err)
-		logrus.Errorln(compObj, "len of compobj ", len(compObj))
+		logrus.Errorln(compObj, "len of compObj ", len(compObj))
 
 		return
 	}
