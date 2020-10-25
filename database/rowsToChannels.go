@@ -20,6 +20,7 @@ func RowsToChan(rows *sql.Rows, results chan []byte) {
 		}
 		results <- dest
 	}
+
 	rows.Close()
 }
 

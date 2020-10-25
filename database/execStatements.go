@@ -40,6 +40,7 @@ func GetData(q queryHandlers.Query) (results chan []byte, err error) {
 		return
 	}
 	go RowsToChan(rows, results)
+	close(results)
 	return
 }
 
