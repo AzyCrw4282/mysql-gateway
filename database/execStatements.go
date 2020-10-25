@@ -19,30 +19,28 @@ var (
 //ToDO: Add SQL implementation using sqldriver for relevant functions.
 //ToDO: Pass the output data rowsToChannels.go to output TUI
 
-
-
 func GetData(q queryHandlers.Query) (results chan []byte, err error) {
-	result := make(chan []byte)
+	results = make(chan []byte)
 	newConn := CurrConnection()
 	defer newConn.Close()
-	sqlQuery,compObj := q.FormatSelectStmt()
+	sqlQuery, compObj := q.FormatSelectStmt()
 	var rows *sql.Rows
 
-	if len(compObj) == 0{
-		rows,err = newConn.QueryContext(ctx,sqlQuery)
-	} else{
-		rows,err = newConn.QueryContext(ctx,sqlQuery,compObj)
+	if len(compObj) == 0 {
+		rows, err = newConn.QueryContext(ctx, sqlQuery)
+	} else {
+		rows, err = newConn.QueryContext(ctx, sqlQuery, compObj...)
 	}
 
-	if err != nil{
+	if err != nil {
 		logrus.Errorln(sqlQuery)
 		logrus.Errorln(err)
 		logrus.Errorln(compObj, "len of compobj ", len(compObj))
 
 		return
 	}
-
-	go
+	go RowsToChan(rows, results)
+	return
 }
 
 func InsertData() {
