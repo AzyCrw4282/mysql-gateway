@@ -24,7 +24,7 @@ type Query struct {
    Limit should also be appended to the string POST-where operation using relevant field
    output: p1: the formatted string. p2: bindedArrayData for (possible?) use!
 */
-func (q *Query) formatSelectStmt() (queryStmt string, bindArray []interface{}) {
+func (q *Query) FormatSelectStmt() (queryStmt string, bindArray []interface{}) {
 	queryStmt = generateSelect(q.Select, q)
 	queryStmt += "FROM " + string(q.Table) + "as tbl"
 	queryStmt, bindArray = generateWhere(q, queryStmt)

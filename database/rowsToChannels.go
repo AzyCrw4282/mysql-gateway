@@ -9,7 +9,9 @@ Responsible for feeding the []bytes into channels
 Input: []bytes of data
 Output: Nothing -  channel modified by byRef
 */
-func bytesDataToChan(rows *sql.Rows, results chan []byte) (err error) {
+func BytesDataToChan(rows *sql.Rows, results chan []byte) (err error) {
 
 	return err
 }
+
+func RowsToChan(rows *sql.Rows)

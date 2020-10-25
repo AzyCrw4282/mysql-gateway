@@ -1,7 +1,6 @@
 package queryHandlers
 
 import (
-	"fmt"
 	"github.com/sirupsen/logrus"
 	"strings"
 )
@@ -57,7 +56,6 @@ func SplitsToCohesiveForm(resultQuery *Query, splitdata []string) (resultObj Que
 				logrus.Error(err)
 				return
 			}
-			fmt.Println("Boolean eval of aggregate or limit functions SET") //-- using print() interfers with line interrupt so add \n break or use println
 			continue
 		}
 		comp.ComparatorObj = secSplit[0]

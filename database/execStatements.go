@@ -1,6 +1,15 @@
 package database
 
-import "mysql-gateway/queryHandlers"
+import (
+	"context"
+	"database/sql"
+	"github.com/sirupsen/logrus"
+	"mysql-gateway/queryHandlers"
+)
+
+var (
+	ctx context.Context
+)
 
 /* Return a channel of bytes of the results, then fed into writerResponse module
 * Input: A comparator object: Field, comparatorObj( operator) and value
@@ -9,13 +18,31 @@ import "mysql-gateway/queryHandlers"
 
 //ToDO: Add SQL implementation using sqldriver for relevant functions.
 //ToDO: Pass the output data rowsToChannels.go to output TUI
-//ToDO: Add compound tests for all implements
+
+
 
 func GetData(q queryHandlers.Query) (results chan []byte, err error) {
+	result := make(chan []byte)
+	newConn := CurrConnection()
+	defer newConn.Close()
+	sqlQuery,compObj := q.FormatSelectStmt()
+	var rows *sql.Rows
 
-	//call to -> formatSelectStmt()
+	if len(compObj) == 0{
+		rows,err = newConn.QueryContext(ctx,sqlQuery)
+	} else{
+		rows,err = newConn.QueryContext(ctx,sqlQuery,compObj)
+	}
 
-	return results, err
+	if err != nil{
+		logrus.Errorln(sqlQuery)
+		logrus.Errorln(err)
+		logrus.Errorln(compObj, "len of compobj ", len(compObj))
+
+		return
+	}
+
+	go
 }
 
 func InsertData() {

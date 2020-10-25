@@ -15,7 +15,6 @@ var CurrConnection func() *sql.Conn
 type connctionCache chan *sql.Conn
 
 func MakeSingleConnection() {
-
 	db, err := connectOrFail()
 	if err != nil {
 		fmt.Printf("failed to conenct, db data %v", db)
@@ -35,7 +34,6 @@ func (con connctionCache) MakeCacheConnection() {
 
 //called from main class to create the 1.m connections
 func StartConnectionCache(size int) func() *sql.Conn {
-
 	var conCache connctionCache = make(chan *sql.Conn, size)
 	go conCache.MakeCacheConnection()
 	return func() *sql.Conn { return <-conCache }
