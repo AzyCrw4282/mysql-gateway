@@ -52,7 +52,6 @@ func processString(w http.ResponseWriter, vars map[string]string, expectedCode i
 }
 
 func parseString(vars map[string]string) (table string, field string, id int) {
-
 	switch len(vars) {
 	case 3:
 		table = vars["entity"]
@@ -62,7 +61,6 @@ func parseString(vars map[string]string) (table string, field string, id int) {
 		id, _ = strconv.Atoi(vars["id"]) //can use ascii to integer -> atoi, or itoa for the reversal ops
 	}
 	return
-
 }
 
 //writer sets the header for what is to be retutrned
@@ -76,7 +74,6 @@ func HandleGetOneOrMany(w http.ResponseWriter, r *http.Request) {
 
 	//check for all possibilities
 	err := processString(w, vars, len(vars))
-
 	if err != nil {
 		fmt.Println("You are missing an empty field.")
 		http.Error(w, "Error with your request /{entity}", http.StatusBadRequest)
@@ -86,7 +83,6 @@ func HandleGetOneOrMany(w http.ResponseWriter, r *http.Request) {
 
 	//it may need to be [1:0] to avoid <moduleName> input
 	query, err := queryHandlers.GetQueryFromUrl(r.URL.String()) //forms the query from the url
-
 	if err != nil {
 		fmt.Println("You are missing an empty field.")
 		CallHTTPBadRequest(w)
